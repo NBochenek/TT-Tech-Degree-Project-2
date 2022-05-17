@@ -1,5 +1,6 @@
 import constants
 player_roster = constants.balance_teams(constants.clean_data(constants.PLAYERS), constants.TEAMS)
+all_teams = set() #Redundant up here?
 
 def get_teams(roster):
     all_teams = set()
@@ -7,6 +8,7 @@ def get_teams(roster):
         all_teams.add(player.get("team"))
     for team in all_teams:
         print(team)
+    return all_teams
 
 
 
@@ -17,7 +19,7 @@ def print_roster(roster):
         print(players)
 
 
-def team_stats(team):
+def team_stats(team): #Needs Error Handling
     total_players = 0
     experienced_players = 0
     inexperienced_players = 0
@@ -52,26 +54,36 @@ def team_stats(team):
         print(guardian)
 
 
+print("Hello, welcome to the basketball stats program."
+" Please select from the following teams to learn more about them:\n")
+
 while True: #Main Loop of the Program.
 
 
-    print("Hello, welcome to the basketball stats program."
-          " Please select from the following teams to learn more about them:\n")
     get_teams(player_roster)
     team_selection = input("\nPlease enter the name of a team:   ").title()
-    team_stats(team_selection)
-    print("\nWould you like continue?")
-    team_selection = input("Enter C to continue. Enter Q to quit.\n").lower()
-    try: #Broken Another while loop needed?
-        if team_selection == "c":
-            continue
-
-        elif team_selection == "q":
+    try:
+        if team_selection == "Q":
             print("Thank you for using the basketball stats tool! Goodbye!")
             break
-    except(ValueError): #Broken
-        print(ValueError)
-        # print("Invalid entry. Please try again.")
+        # elif team_selection not in all_teams:
+        #     raise ValueError("That is not a valid team name. Please try again.")
+        #     continue
+        else:
+            team_stats(team_selection)
+            print("\nWould you like continue? Enter Q to quit or enter a team name to continue.\n"
+                  "Teams:")
+    except ValueError as err:
+        print(f"{err}")
+        continue
+    except ZeroDivisionError as err:
+        print(f"{err}")
+        continue
+    else:
+        break
+
+
+
 
 
 # team_stats("Panthers")
