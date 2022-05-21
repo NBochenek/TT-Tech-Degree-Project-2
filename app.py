@@ -1,16 +1,15 @@
 import constants
 player_roster = constants.balance_teams(constants.clean_data(constants.PLAYERS), constants.TEAMS)
-all_teams = set() #Redundant up here?
 
-def get_teams(roster):
+
+def get_teams(roster):  # Prints all the teams in the roster and returns the set of all teams.
     all_teams = set()
     for player in roster:
         all_teams.add(player.get("team"))
+    print("Teams:\n")
     for team in all_teams:
         print(team)
-    return all_teams
-
-
+    return all_teams  # Why doesn't this return?
 
 
 def print_roster(roster):
@@ -19,7 +18,7 @@ def print_roster(roster):
         print(players)
 
 
-def team_stats(team): #Needs Error Handling
+def team_stats(team):
     total_players = 0
     experienced_players = 0
     inexperienced_players = 0
@@ -59,20 +58,20 @@ print("Hello, welcome to the basketball stats program."
 
 while True: #Main Loop of the Program.
 
-
-    get_teams(player_roster)
+    all_teams = get_teams(player_roster) #  Function prints all teams.
     team_selection = input("\nPlease enter the name of a team:   ").title()
     try:
         if team_selection == "Q":
             print("Thank you for using the basketball stats tool! Goodbye!")
             break
-        # elif team_selection not in all_teams:
-        #     raise ValueError("That is not a valid team name. Please try again.")
-        #     continue
-        else:
+        elif team_selection in all_teams:
             team_stats(team_selection)
-            print("\nWould you like continue? Enter Q to quit or enter a team name to continue.\n"
-                  "Teams:")
+            print("\nWould you like continue? Enter Q to quit or enter a team name to continue.\n")
+            continue
+        else:
+            raise ValueError("That is not a valid team name. Please try again.\n")
+            continue
+
     except ValueError as err:
         print(f"{err}")
         continue
