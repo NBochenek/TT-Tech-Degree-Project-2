@@ -114,10 +114,10 @@ PLAYERS = [{
 ]
 
 
-def sort_by_experience(roster):
+def sort_by_experience(roster):  # Sorts roster by experience to ensure those with experience are equally distributed.
     return roster["experience"]
 
-def calculate_experience(roster):
+def calculate_experience(roster):  # Determines the number of players with experience on each team to ensure equality.
     total_experienced_players = 0
     for player in roster:
         if player.get("experience") == True:
@@ -125,7 +125,7 @@ def calculate_experience(roster):
     return total_experienced_players
 
 
-def clean_data(list):
+def clean_data(list):  # Cleans constants data according to parameters defined in README.
     players_cleaned = []
     for item in list:
         dict_cleaned = {}
@@ -140,7 +140,7 @@ def clean_data(list):
     return players_cleaned
 
 
-def balance_teams(roster, teams):
+def balance_teams(roster, teams):  # Balances Teams according to parameters defined in README.
     team_assignment = ""
     players_panthers = 0
     players_bandits = 0
@@ -185,6 +185,6 @@ def balance_teams(roster, teams):
 
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  #  Dunder Main statement
     for players in balance_teams(clean_data(PLAYERS), TEAMS):
         print(players.get("team"))
