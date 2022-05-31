@@ -13,10 +13,10 @@ def get_teams(roster):  # Prints all the teams in the roster and returns the set
     return all_teams
 
 
-def print_roster(roster):
-    for players in roster:
-        # print(players.get("team"))
-        print(players)
+# def print_roster(roster):
+#     for players in roster:
+#         # print(players.get("team"))
+#         print(players)
 
 
 def team_stats(team):  # Returns team stats based on clean and balanced roster.
@@ -30,9 +30,9 @@ def team_stats(team):  # Returns team stats based on clean and balanced roster.
         if player["team"] == str(team):     # Filters out all players who aren't on specified team.
             total_players += 1              # Tracks how many players are on the team
             player_name = player.get("name")# gets player's name from dictionary
-            team_roster.append(player_name) # adds player name to list
+            team_roster.append(player_name) # adds player name to list ** Why doesnt this need .copy?
             guardian_name = player.get("guardians")
-            team_guardians.append(guardian_name)
+            team_guardians.append(guardian_name.copy())  # adds guardian names to list ** Why does this need .copy?
             total_height = player.get("height") + total_height
             if player.get("experience") == True:
                 experienced_players += 1
